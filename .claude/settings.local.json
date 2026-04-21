@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node index.js)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(findstr :5173)",
+      "Bash(taskkill /PID 17448 /F)",
+      "Bash(cmd /c \"taskkill /PID 17448 /F\")",
+      "Bash(cmd //c \"taskkill //PID 17448 //F\")",
+      "Bash(powershell -Command \"Stop-Process -Id 17448 -Force\")",
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force\")",
+      "Bash(curl -s http://localhost:3001/api/flights)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Flights: {len\\(d\\)}'\\)\")",
+      "Bash(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\); const arr=JSON.parse\\(d\\); console.log\\('Flights:', arr.length\\);\")",
+      "Bash(powershell -Command \"\\(Invoke-WebRequest -Uri 'http://localhost:3001/api/flights'\\).Content | ConvertFrom-Json | Measure-Object | Select-Object -ExpandProperty Count\")",
+      "Bash(curl -s \"http://localhost:3001/api/stats\")",
+      "Bash(curl -s http://localhost:3001/api/stats)",
+      "Bash(gh auth *)",
+      "Bash(git config *)"
+    ]
+  }
+}

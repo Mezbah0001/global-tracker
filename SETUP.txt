@@ -1,0 +1,53 @@
+GLOBAL TRACKER — Setup Instructions
+=====================================
+
+Prerequisites
+  - Node.js 18+
+  - npm 9+
+
+Quick Start (one command)
+  1. npm run install:all    # installs all deps (root + server + client)
+  2. npm run dev            # starts both server (port 3001) + client (port 5173)
+  3. Open http://localhost:5173
+
+Step-by-step
+  # Terminal 1 — Backend
+  cd server
+  cp .env.example .env     # optional: add OpenSky credentials
+  npm install
+  npm run dev
+
+  # Terminal 2 — Frontend
+  cd client
+  npm install
+  npm run dev
+
+Optional: OpenSky credentials
+  Anonymous API access gives ~400 req/day (enough for ~26 fetches at 15s intervals).
+  For unlimited access register free at https://opensky-network.org/
+  Then add to server/.env:
+    OPENSKY_USER=your_username
+    OPENSKY_PASS=your_password
+
+Architecture
+  server/                   Express + Socket.io backend
+    index.js                Main server, WebSocket hub
+    services/opensky.js     OpenSky Network API proxy + cache
+    services/shipSimulator  Simulates 122 ships on real global routes
+
+  client/src/
+    App.jsx                 Root component, theme sync
+    store/useStore.js       Zustand state (prefs persisted, live data ephemeral)
+    hooks/useSocket.js      Socket.io connection
+    components/Map/         Leaflet map, flight/ship/trail/heatmap layers
+    components/Sidebar/     Collapsible sidebar: search, filters, display, favorites
+    components/Dashboard/   Analytics panel with Recharts
+    components/UI/          Info modal, control bar
+    utils/geo.js            Haversine, prediction, anomaly detection
+    utils/icons.js          SVG aircraft/ship DivIcons
+
+Map tile sources (all free, no API key)
+  Night    — CartoDB Dark Matter
+  Street   — OpenStreetMap
+  Satellite — Esri World Imagery
+  Minimal  — CartoDB Positron
